@@ -7,7 +7,6 @@ package com.daytoday.ratingsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +14,12 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,7 +27,6 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
 @Document(collection = "product_rating")
@@ -38,29 +38,29 @@ public class ProductRating implements Serializable {
   @Field("id")
   private String id;
 
+  @NotNull
+  @Indexed
   @Field("product_id")
   private String productId;
 
+  @NotNull
   @Field("customer_id")
   private String customerId;
 
   @Field("rating")
-  private Float rating;
+  private Integer rating;
 
   @Field("review")
   private String review;
 
-  @Field("is_curated")
-  private boolean isCurated = false;
-
-  @Field("created_on")
   @CreatedDate
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  @Field("created_on")
   private Date createdOn;
 
-  @Field("updated_on")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   @LastModifiedDate
+  @Field("updated_on")
   private Date updatedOn;
 
 }

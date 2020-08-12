@@ -6,7 +6,6 @@ package com.daytoday.ratingsystem.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,7 +25,6 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
 @Document(collection = "product")
@@ -37,22 +36,24 @@ public class Product implements Serializable {
   @Field("id")
   private String id;
 
+  @NotNull
   @Field("name")
   private String name;
 
   @Field("description")
   private String description;
 
+  @NotNull
   @Field("base_price")
   private Float basePrice;
 
-  @Field("created_on")
   @CreatedDate
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  @Field("created_on")
   private Date createdOn;
 
-  @Field("updated_on")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   @LastModifiedDate
+  @Field("updated_on")
   private Date updatedOn;
 }

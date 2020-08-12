@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRatingRepository extends MongoRepository<ProductRating, String> {
+
+  ProductRating findByCustomerIdAndProductId(String productId, String customerId);
 }

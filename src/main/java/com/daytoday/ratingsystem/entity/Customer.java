@@ -6,7 +6,6 @@ package com.daytoday.ratingsystem.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,10 +13,12 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,7 +26,6 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
 @Document(collection = "customer")
@@ -37,21 +37,27 @@ public class Customer implements Serializable {
   @Field("id")
   private String id;
 
+  @NotNull
   @Field("first_name")
   private String firstName;
 
   @Field("middle_name")
   private String middleName;
 
+  @NotNull
   @Field("last_name")
   private String lastName;
 
+  @NotNull
   @Field("phone_number")
   private Integer phoneNumber;
 
+  @NotNull
   @Field("country_code")
   private String countryCode;
 
+  @NotNull
+  @Indexed(unique=true)
   @Field("email")
   private String email;
 
@@ -61,14 +67,14 @@ public class Customer implements Serializable {
   @Field("zip_code")
   private Integer zipCode;
 
-  @Field("created_on")
   @CreatedDate
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  @Field("created_on")
   private Date createdOn;
 
-  @Field("updated_on")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   @LastModifiedDate
+  @Field("updated_on")
   private Date updatedOn;
 
 }
