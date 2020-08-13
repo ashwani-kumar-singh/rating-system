@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
   private CustomerRepository customerRepository;
 
   @Override
-  public RatingResponse<CustomerDTO> createCustomer(CustomerDTO customerDTO){
+  public RatingResponse<CustomerDTO> createCustomer(CustomerDTO customerDTO) {
     log.debug("create/update request for customer with request:{}", customerDTO);
     RatingResponse<CustomerDTO> customerResponse = new RatingResponse<>(RatingResponseCode.FAILED);
     Customer customer = customerRepository.findByEmail(customerDTO.getEmail());
@@ -37,15 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
       if (Objects.isNull(customer)) {
         customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
-        customerRepository.save(customer);
+        customer = customerRepository.save(customer);
         customerDTO.setId(customer.getId());
       } else {
         BeanUtils.copyProperties(customerDTO, customer);
         customerRepository.save(customer);
       }
     } catch (Exception exp) {
-      log.error("failed in saving customer details in db for customerDTO:{}", customerDTO,
-          exp);
+      log.error("failed in saving customer details in db for customerDTO:{}", customerDTO, exp);
       throw new RatingSystemBaseException(RatingResponseCode.DATABASE_ERROR.getDesc());
     }
     customerResponse.setStatus(RatingResponseCode.SUCCESS);

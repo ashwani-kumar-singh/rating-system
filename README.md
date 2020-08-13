@@ -258,7 +258,7 @@ response -
 ```
 curl -X GET --header 'Accept: application/json' 'http://localhost:9090/v1/product-rating/5f34ef6a0b6e193437e6671e'
 ```
-respone -
+response -
 ```
 {
   "status": "SUCCESS",

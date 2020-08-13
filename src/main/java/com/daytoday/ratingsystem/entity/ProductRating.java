@@ -8,6 +8,7 @@ package com.daytoday.ratingsystem.entity;
 import com.daytoday.ratingsystem.constant.RatingConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +29,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
 @Document(collection = RatingConstants.PRODUCT_RATING)

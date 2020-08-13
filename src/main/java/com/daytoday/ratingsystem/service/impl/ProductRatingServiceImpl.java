@@ -17,7 +17,6 @@ import com.daytoday.ratingsystem.service.api.ProductRatingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -36,9 +35,6 @@ public class ProductRatingServiceImpl implements ProductRatingService {
   @Autowired
   private ProductRatingRepository productRatingRepository;
 
-  @Autowired
-  private MongoTemplate mongoTemplate;
-
   @Override
   public RatingResponse<Boolean> submitRating(ProductRatingDTO productRatingDTO) {
     log.debug("submit rating for request:{}", productRatingDTO);
@@ -50,7 +46,7 @@ public class ProductRatingServiceImpl implements ProductRatingService {
       if (Objects.isNull(productRating)) {
         productRating = new ProductRating();
         BeanUtils.copyProperties(productRatingDTO, productRating);
-        productRatingRepository.save(productRating);
+        productRating = productRatingRepository.save(productRating);
         productRatingDTO.setId(productRating.getId());
       } else {
         BeanUtils.copyProperties(productRatingDTO, productRating);

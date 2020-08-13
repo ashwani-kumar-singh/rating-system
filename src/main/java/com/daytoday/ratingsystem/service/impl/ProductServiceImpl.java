@@ -40,15 +40,15 @@ public class ProductServiceImpl implements ProductService {
     log.debug("create/update request for product with request:{}", productDTO);
     RatingResponse<ProductDTO> productResponse = new RatingResponse<>(RatingResponseCode.FAILED);
     Product product;
-    try{
-      if(StringUtils.isEmpty(productDTO.getId())){
+    try {
+      if (StringUtils.isEmpty(productDTO.getId())) {
         product = new Product();
         BeanUtils.copyProperties(productDTO, product);
         product = productRepository.save(product);
         productDTO.setId(product.getId());
       } else {
         Optional<Product> productOptional = productRepository.findById(productDTO.getId());
-        if(productOptional.isPresent()){
+        if (productOptional.isPresent()) {
           product = productOptional.get();
           BeanUtils.copyProperties(productDTO, product);
           productRepository.save(product);
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
           throw new RatingSystemBaseException(RatingResponseCode.DATA_VALIDATION_FAILED.getDesc());
         }
       }
-    } catch (Exception exp){
+    } catch (Exception exp) {
       log.error("failed in saving product details in db for productDTO:{}", productDTO, exp);
       throw new RatingSystemBaseException(RatingResponseCode.DATABASE_ERROR.getDesc());
     }
@@ -71,8 +71,14 @@ public class ProductServiceImpl implements ProductService {
     log.debug("get product for product id:{}", productId);
     RatingResponse<ProductDTO> productResponse = new RatingResponse<>(RatingResponseCode.FAILED);
     ProductDTO productDTO = new ProductDTO();
-    Optional<Product> productOptional = productRepository.findById(productId);
-    if(productOptional.isPresent()){
+    Optional<Product> productOptional;
+    try {
+      productOptional = productRepository.findById(productId);
+    } catch (Exception exp) {
+      log.error("failed in getting product for product id:{}", productId, exp);
+      throw new RatingSystemBaseException(RatingResponseCode.DATABASE_ERROR.getDesc());
+    }
+    if (productOptional.isPresent()) {
       RatingResponse<ProductRatingAnalytics> ratingResponse =
           productRatingService.getRatingAnalyticsForProduct(productId);
       BeanUtils.copyProperties(productOptional.get(), productDTO);
@@ -94,7 +100,12 @@ public class ProductServiceImpl implements ProductService {
     log.debug("delete product for product id:{}", productId);
     RatingResponse<Boolean> productResponse =
         new RatingResponse<>(Boolean.FALSE, RatingResponseCode.FAILED);
-    productRepository.deleteById(productId);
+    try {
+      productRepository.deleteById(productId);
+    } catch (Exception exp) {
+      log.error("failed in deleting product for product id:{}", productId, exp);
+      throw new RatingSystemBaseException(RatingResponseCode.DATABASE_ERROR.getDesc());
+    }
     productResponse.setStatus(RatingResponseCode.SUCCESS);
     productResponse.setResponseObject(Boolean.TRUE);
     return productResponse;
