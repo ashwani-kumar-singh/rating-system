@@ -9,7 +9,7 @@
 1. create / update customer details.
 2. create / update / delete / get product details.
 3. create / update product rating.
-4. get rating analytics for a product
+4. get rating analytics for a product.
 ```
 ## Future Enhancement / Improvement
 ```
@@ -32,7 +32,7 @@
 
 ## Database Changes
 
-### Databse: MED_PRODUCT
+### Database Name: MED_PRODUCT
 
 <b>Collections</b>:
 
