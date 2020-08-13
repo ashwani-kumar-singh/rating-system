@@ -1,17 +1,18 @@
 # Rating System for Product
-***************************************** <b>Assumptions</b> *************************************************************
+## Assumptions
+```
 1. Rating will be integer value.
 2. Average Rating will be Integer or Decimal value upto 1 place of decimal.
-
-***************************************** <b> System capability </b> *******************************************************
-
+```
+## System capability
+```
 1. create / update customer details.
 2. create / update / delete / get product details.
 3. create / update product rating.
 4. get rating analytics for a product
-
-********************************** <b>Future Enhancement / Improvement</b> ************************************************
-
+```
+## Future Enhancement / Improvement
+```
 1. Like /Dislike for product.
 2. Collect details on the basis of rating of product.
 3. Percentage of customer rated particular rating for product. 
@@ -19,19 +20,20 @@
    review from BD/Support.
 5. Messaging Queue System to calcluate product rating analytics after the product is removed from curation 
    process.
+ ```
  
- ***************************************** <b>System Flows</b> ***********************************************************
+## System Flows
    
 ![GitHub Logo](https://github.com/ashwani-kumar-singh/rating-system/blob/master/images/SaveRatingFlow.png)
 ![GitHub Logo](https://github.com/ashwani-kumar-singh/rating-system/blob/master/images/GetProductFlow.png)
 ![GitHub Logo](https://github.com/ashwani-kumar-singh/rating-system/blob/master/images/ProductRatingAnalyticsFlow.png)
 
 
-***************************************** <b>Database Changes</b> *********************************************************
+## Database Changes
 
-Databse: <b>MED_PRODUCT</b>
+### Databse: MED_PRODUCT
 
-collections:
+<b>Collections</b>:
 
 -: <b>product</b> :-  
 ```
