@@ -1,10 +1,10 @@
 # Rating System for Product
 ## Assumptions
 ```
-1. Rating will be integer value.
+1. Rating will be Integer value.
 2. Average Rating will be Integer or Decimal value upto 1 place of decimal.
 ```
-## System capability
+## System Capabilities
 ```
 1. create / update customer details.
 2. create / update / delete / get product details.
@@ -13,12 +13,13 @@
 ```
 ## Future Enhancement / Improvement
 ```
-1. Like /Dislike for product.
-2. Collect details on the basis of rating of product.
-3. Percentage of customer rated particular rating for product. 
-4. We can use of concept of curated field in product_rating field, so that it is reflected only after 
+1. Like / Dislike for product.
+2. Support for Decimal rating.
+3. Collect details on the basis of rating of product.
+4. Percentage of customer rated particular rating for product. 
+5. We can use of concept of curated field in product_rating field, so that it is reflected only after 
    review from BD/Support.
-5. Messaging Queue System to calcluate product rating analytics after the product is removed from curation 
+6. Messaging Queue System to calculate product rating analytics after the product is removed from curation 
    process.
  ```
  
