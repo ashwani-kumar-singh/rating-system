@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRatingRepository extends MongoRepository<ProductRating, String> {
+public interface ProductRatingRepository extends MongoRepository<ProductRating, String>,
+    ProductRatingRepositoryCustom {
 
   ProductRating findByCustomerIdAndProductId(String productId, String customerId);
 }

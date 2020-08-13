@@ -7,6 +7,7 @@ package com.daytoday.ratingsystem.service.impl;
 
 import com.daytoday.ratingsystem.constant.RatingResponseCode;
 import com.daytoday.ratingsystem.entity.Customer;
+import com.daytoday.ratingsystem.exception.RatingSystemBaseException;
 import com.daytoday.ratingsystem.model.dto.CustomerDTO;
 import com.daytoday.ratingsystem.model.response.RatingResponse;
 import com.daytoday.ratingsystem.repository.CustomerRepository;
@@ -15,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
@@ -33,13 +33,20 @@ public class CustomerServiceImpl implements CustomerService {
     log.debug("create/update request for customer with request:{}", customerDTO);
     RatingResponse<CustomerDTO> customerResponse = new RatingResponse<>(RatingResponseCode.FAILED);
     Customer customer = customerRepository.findByEmail(customerDTO.getEmail());
-    if(Objects.isNull(customer)){
-      customer = new Customer();
-      BeanUtils.copyProperties(customerDTO, customer);
-      customerRepository.save(customer);
-    } else {
-      BeanUtils.copyProperties(customerDTO, customer);
-      customerRepository.save(customer);
+    try {
+      if (Objects.isNull(customer)) {
+        customer = new Customer();
+        BeanUtils.copyProperties(customerDTO, customer);
+        customerRepository.save(customer);
+        customerDTO.setId(customer.getId());
+      } else {
+        BeanUtils.copyProperties(customerDTO, customer);
+        customerRepository.save(customer);
+      }
+    } catch (Exception exp) {
+      log.error("failed in saving customer details in db for customerDTO:{}", customerDTO,
+          exp);
+      throw new RatingSystemBaseException(RatingResponseCode.DATABASE_ERROR.getDesc());
     }
     customerResponse.setStatus(RatingResponseCode.SUCCESS);
     customerResponse.setResponseObject(customerDTO);

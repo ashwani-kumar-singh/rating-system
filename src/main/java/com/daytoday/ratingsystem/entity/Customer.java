@@ -4,6 +4,7 @@ package com.daytoday.ratingsystem.entity;
  * Created By Ashwani Singh
  * Dated: 12th Aug 2020
  */
+import com.daytoday.ratingsystem.constant.RatingConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,53 +29,53 @@ import java.util.Date;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
-@Document(collection = "customer")
+@Document(collection = RatingConstants.CUSTOMER_COLLECTION)
 public class Customer implements Serializable {
 
   private static final long serialVersionUID = 839421411300342313L;
 
   @Id
-  @Field("id")
+  @Field(RatingConstants.ID)
   private String id;
 
   @NotNull
-  @Field("first_name")
+  @Field(RatingConstants.FIRST_NAME)
   private String firstName;
 
-  @Field("middle_name")
+  @Field(RatingConstants.MIDDLE_NAME)
   private String middleName;
 
   @NotNull
-  @Field("last_name")
+  @Field(RatingConstants.LAST_NAME)
   private String lastName;
 
   @NotNull
-  @Field("phone_number")
-  private Integer phoneNumber;
+  @Field(RatingConstants.PHONE_NUMBER)
+  private String phoneNumber;
 
   @NotNull
-  @Field("country_code")
+  @Field(RatingConstants.COUNTRY_CODE)
   private String countryCode;
 
   @NotNull
   @Indexed(unique=true)
-  @Field("email")
+  @Field(RatingConstants.CUSTOMER_EMAIL)
   private String email;
 
-  @Field("address")
+  @Field(RatingConstants.CUSTOMER_ADDRESS)
   private String address;
 
-  @Field("zip_code")
+  @Field(RatingConstants.ZIP_CODE)
   private Integer zipCode;
 
   @CreatedDate
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  @Field("created_on")
+  @Field(RatingConstants.CREATED_ON)
   private Date createdOn;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   @LastModifiedDate
-  @Field("updated_on")
+  @Field(RatingConstants.UPDATED_ON)
   private Date updatedOn;
 
 }

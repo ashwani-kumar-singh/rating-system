@@ -5,6 +5,7 @@ package com.daytoday.ratingsystem.model.dto;
  * Dated: 12th Aug 2020
  */
 
+import com.daytoday.ratingsystem.constant.RatingConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDTO {
 
+  @JsonProperty(RatingConstants.ID)
   private String id;
 
   @NotNull
@@ -33,10 +35,10 @@ public class ProductDTO {
   private String description;
 
   @NotNull
-  @JsonProperty("base_price")
+  @JsonProperty(RatingConstants.BASE_PRICE)
   private Float basePrice;
 
-  @JsonProperty("average_rating")
+  @JsonProperty(RatingConstants.AVERAGE_RATING)
   private Float averageRating;
 
 }

@@ -5,6 +5,7 @@ package com.daytoday.ratingsystem.model.dto;
  * Dated: 12th Aug 2020
  */
 
+import com.daytoday.ratingsystem.constant.RatingConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -25,23 +26,26 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDTO {
 
+  @JsonProperty(RatingConstants.ID)
+  private String id;
+
   @NotNull
-  @JsonProperty("first_name")
+  @JsonProperty(RatingConstants.FIRST_NAME)
   private String firstName;
 
-  @JsonProperty("middle_name")
+  @JsonProperty(RatingConstants.MIDDLE_NAME)
   private String middleName;
 
   @NotNull
-  @JsonProperty("last_name")
+  @JsonProperty(RatingConstants.LAST_NAME)
   private String lastName;
 
   @NotNull
-  @JsonProperty("phone_number")
-  private Integer phoneNumber;
+  @JsonProperty(RatingConstants.PHONE_NUMBER)
+  private String phoneNumber;
 
   @NotNull
-  @JsonProperty("country_code")
+  @JsonProperty(RatingConstants.COUNTRY_CODE)
   private String countryCode;
 
   @NotNull
@@ -49,7 +53,7 @@ public class CustomerDTO {
 
   private String address;
 
-  @JsonProperty("zip_code")
+  @JsonProperty(RatingConstants.ZIP_CODE)
   private Integer zipCode;
 
 }

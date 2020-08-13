@@ -30,19 +30,17 @@ public class ProductRatingController {
   @Autowired
   private ProductRatingService productRatingService;
 
-  @PutMapping("/{product_id}")
-  public ResponseEntity<RatingResponse<Boolean>> submitRating(@RequestParam String customerId,
+  @PutMapping("/submit")
+  public ResponseEntity<RatingResponse<Boolean>> submitRating(
       @RequestBody ProductRatingDTO productRatingDTO) {
     log.info("Got call to submit review with request:{} ", productRatingDTO);
-    RatingResponse<Boolean> ratingResponse =
-        productRatingService.submitRating(productRatingDTO);
+    RatingResponse<Boolean> ratingResponse = productRatingService.submitRating(productRatingDTO);
     log.info("Sending submit review response for request:{} with response:{}", productRatingDTO,
         ratingResponse);
     return new ResponseEntity<>(ratingResponse, ratingResponse.getStatusCode());
   }
 
-
-  @GetMapping("/{product_id}")
+  @GetMapping("/{productId}")
   public ResponseEntity<RatingResponse<ProductRatingAnalytics>> getRatingAnalyticsForProduct(
       @PathVariable String productId) {
     log.info("Got call to get product rating analytics with productId:{}", productId);

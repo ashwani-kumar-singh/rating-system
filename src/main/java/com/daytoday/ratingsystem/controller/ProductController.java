@@ -10,8 +10,6 @@ import com.daytoday.ratingsystem.model.response.RatingResponse;
 import com.daytoday.ratingsystem.service.api.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,17 +40,7 @@ public class ProductController {
     return new ResponseEntity<>(productResponse, productResponse.getStatusCode());
   }
 
-  @GetMapping("/all")
-  public ResponseEntity<RatingResponse<Page<ProductDTO>>> getPaginatedProducts(Pageable pageable) {
-    log.info("Got call to get products with pageable:{}",  pageable);
-    RatingResponse<Page<ProductDTO>> productResponse =
-        productService.getPaginatedProducts(pageable);
-    log.info("Sending get products response for pageable:{}, response: {}", pageable,
-        productResponse);
-    return new ResponseEntity<>(productResponse, productResponse.getStatusCode());
-  }
-
-  @GetMapping("/{product_id}")
+  @GetMapping("/{productId}")
   public ResponseEntity<RatingResponse<ProductDTO>> getProduct(@PathVariable String productId) {
     log.info("Got call to get product with productId:{}", productId);
     RatingResponse<ProductDTO> productResponse = productService.getProduct(productId);
@@ -61,7 +49,7 @@ public class ProductController {
     return new ResponseEntity<>(productResponse, productResponse.getStatusCode());
   }
 
-  @DeleteMapping("/{product_id}")
+  @DeleteMapping("/{productId}")
   public ResponseEntity<RatingResponse<Boolean>> deleteProduct(@PathVariable String productId) {
     log.info("Got call to delete product with productId:{}", productId);
     RatingResponse<Boolean> productResponse =

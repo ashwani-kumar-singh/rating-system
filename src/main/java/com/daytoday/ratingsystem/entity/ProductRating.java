@@ -5,6 +5,7 @@ package com.daytoday.ratingsystem.entity;
  * Dated: 12th Aug 2020
  */
 
+import com.daytoday.ratingsystem.constant.RatingConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,38 +30,38 @@ import java.util.Date;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString(doNotUseGetters = true)
-@Document(collection = "product_rating")
+@Document(collection = RatingConstants.PRODUCT_RATING)
 public class ProductRating implements Serializable {
 
   private static final long serialVersionUID = 829421311300342313L;
 
   @Id
-  @Field("id")
+  @Field(RatingConstants.ID)
   private String id;
 
   @NotNull
   @Indexed
-  @Field("product_id")
+  @Field(RatingConstants.PRODUCT_ID)
   private String productId;
 
   @NotNull
-  @Field("customer_id")
+  @Field(RatingConstants.CUSTOMER_ID)
   private String customerId;
 
-  @Field("rating")
+  @Field(RatingConstants.RATING)
   private Integer rating;
 
-  @Field("review")
+  @Field(RatingConstants.REVIEW)
   private String review;
 
   @CreatedDate
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  @Field("created_on")
+  @Field(RatingConstants.CREATED_ON)
   private Date createdOn;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   @LastModifiedDate
-  @Field("updated_on")
+  @Field(RatingConstants.UPDATED_ON)
   private Date updatedOn;
 
 }
