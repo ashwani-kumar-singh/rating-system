@@ -1,4 +1,12 @@
 # Rating System for Product
+
+## Tech Stack
+```
+1. Java 8
+2. Springboot
+3. Mongo Altas
+```
+
 ## Assumptions
 ```
 1. Rating will be Integer value.
