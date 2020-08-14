@@ -4,7 +4,7 @@
 ```
 1. Java 8
 2. Springboot
-3. Mongo Altas
+3. Mongo Atlas
 ```
 
 ## Assumptions
