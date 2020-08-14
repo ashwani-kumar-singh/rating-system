@@ -87,9 +87,9 @@
 }
 ```
 
-********************************************** Curl Request *******************************************************
+## Curl Request 
 
-<b>Swagger Link</b> - http://localhost:9090/swagger-ui.html
+### Swagger Link - http://localhost:9090/swagger-ui.html
 
 -: <b>create customer details</b> :- 
 ```
